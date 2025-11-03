@@ -1,13 +1,13 @@
 <?php 
-include("config/config.php");
+include("../config/config.php");
 if(isset($_POST['update_profile'])){
-	global $donor_id,$first_name,$last_name,$phone,$address,$db;
-	$donor_id=validate($_POST['donor_id']);
-	$first_name=validate($_POST['first_name']);
-	$last_name=validate($_POST['last_name']);
+	global $receiver_id,$ngo_name,$ngo_regd_no,$phone,$address,$db;
+	$receiver_id=validate($_POST['receiver_id']);
+	$ngo_name=validate($_POST['ngo_name']);
+	$ngo_regd_no=validate($_POST['ngo_regd_no']);
 	$address=validate($_POST['address']);
 	$phone=validate($_POST['phone']);
-		$sql = "UPDATE donor SET first_name='$first_name',last_name='$last_name',phone='$phone',address='$address' WHERE donor_id='$donor_id'";
+		$sql = "UPDATE receiver SET ngo_name='$ngo_name',ngo_regd_no='$ngo_regd_no',phone='$phone',address='$address' WHERE receiver_id='$receiver_id'";
 		$query=mysqli_query($db,$sql);
 		if(!empty($query)){
 			?>
@@ -50,6 +50,12 @@ if(isset($_POST['update_profile'])){
 
 <?php
 	}
+}
+function validate($data){
+	$data = trim($data);
+	$data = stripcslashes($data);
+	$data = htmlspecialchars($data);
+	return $data;
 }
 
  ?>
